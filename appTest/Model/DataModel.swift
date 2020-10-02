@@ -10,9 +10,9 @@ import Foundation
 struct DataModel : Identifiable {
     
     var id : String
-    var email : String
+    var email : String?
     var title : String
     var name : String
-    var body : String
+    var text : String
     
 }

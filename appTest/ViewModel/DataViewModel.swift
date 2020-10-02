@@ -14,6 +14,7 @@ class DataViewModel: ObservableObject {
     
     @Published var error : Error? = nil
     @Published var saved : Bool = false
+    @Published var isEdited : Bool = false
     @Published var data = [DataModel]()
     
     
@@ -31,11 +32,11 @@ class DataViewModel: ObservableObject {
                     let id = doc.documentID
                     let tittle = value["title"] as? String ?? "EMPTY"
                     let name = value["name"] as? String ?? "EMPTY"
-                    let body = value["body"] as? String ?? "EMPTY"
-                    let email = value["uid"] as? String ?? "EMPTY"
+                    let text = value["text"] as? String ?? "EMPTY"
+                    
                     
                     DispatchQueue.main.async {
-                        let reg = DataModel(id: id, email: email, title: tittle, name: name, body: body)
+                        let reg = DataModel(id: id, title: tittle, name: name, text: text)
                         self.data.append(reg)
                     }
                 }
@@ -43,13 +44,13 @@ class DataViewModel: ObservableObject {
         }
     }
     
-    func saveData(title : String,name: String, text: String){
-        let data : [String : Any] = ["title" : title, "name": name, "body": text]
+    func saveData(title: String,name: String, text: String){
+        let data : [String : Any] = ["title" : title, "name": name, "text": text]
         db.collection("test").addDocument(data: data) { (error) in
             if let error = error {
                 self.error = error
             }else{
-                self.saved.toggle()
+                self.saved = true
             }
         }
     }
@@ -58,5 +59,17 @@ class DataViewModel: ObservableObject {
         let id = self.data[index.first!].id
         db.collection("test").document(id).delete()
         self.data.remove(atOffsets: index)
+    }
+    
+    func editSelected(item:DataModel, title:String, name:String, text:String){
+        let id = item.id
+        let data : [String : Any] = ["title" : title, "name": name, "text": text]
+        db.collection("test").document(id).updateData(data) {(error) in
+            if let error = error {
+                self.error = error
+            }else{
+                self.isEdited = true
+            }
+        }
     }
 }

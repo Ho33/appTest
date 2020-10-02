@@ -18,23 +18,31 @@ struct DataView: View {
     @State private var userUid : String = ""
     @State private var errorAlert : (Bool,String) = (false,"")
     
-    @Binding var show : Bool
+    //@Binding var show : Bool
+    
+    @Environment(\.presentationMode) var presentationMode
     
     
     var body: some View {
         NavigationView{
             VStack{
                 VStack{
+                    Text("SAVE NEW ENTRIE").font(.system(size: 20)).fontWeight(.ultraLight).padding().frame(width:220 , height:60).foregroundColor(.blue)
                     SingleFormView(fieldName: "Tittle", fieldValue: self.$tittle, isProtected: false)
                     SingleFormView(fieldName: "Name", fieldValue: self.$name, isProtected: false)
                     SingleFormView(fieldName: "body", fieldValue: self.$text, isProtected: false)
                 }
                 Button(action: {
-                    self.dataVM.saveData(title: self.tittle, name: self.name, text: text)
-                }, label: {
+                    self.dataVM.saveData(title: self.tittle, name: self.name, text: self.text)
+                }) {
                     Text("Save")
-                })
+                        .frame(width: 250 , height: 55)
+                        .foregroundColor(Color.white).background(Color.blue)
+                        .cornerRadius(30.0)
+                }.padding(.top,30)
+                Spacer()
             }
+            
         }.alert(isPresented: self.$errorAlert.0) {
             Alert(title: Text("ERROR") , message: Text(self.errorAlert.1), dismissButton: .default(Text("OK")))
         
@@ -47,7 +55,7 @@ struct DataView: View {
         })
         .onReceive(self.dataVM.$saved, perform: { value in
             if value {
-                self.show = false
+                self.presentationMode.wrappedValue.dismiss()
             }
         })
     }
@@ -55,6 +63,6 @@ struct DataView: View {
 
 struct DataView_Previews: PreviewProvider {
     static var previews: some View {
-        DataView(show: .constant(false))
+        DataView()
     }
 }

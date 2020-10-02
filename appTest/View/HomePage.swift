@@ -28,20 +28,19 @@ struct HomePage: View {
             ZStack{
                 List {
                     ForEach(self.data){ item in
-                        
-                        VStack (alignment: .leading) {
-                            Text(item.title)
-                                .font(.title)
-                                .bold()
-                            Text(item.name)
-                            Text(item.body)
-                            Text(item.email)
+                        NavigationLink(destination: EditView(item: item)){
+                            VStack (alignment: .leading) {
+                                Text(item.title)
+                                    .font(.title)
+                                    .bold()
+                                Text(item.name)
+                                Text(item.text)
+                            }
                         }
                     }.onDelete(perform: { index in
                         self.dataVM.deleteSelected(index : index)
                     })
                 }
-                
                 VStack {
                     Spacer()
                     HStack {
@@ -67,7 +66,7 @@ struct HomePage: View {
                                     })
             )
             .sheet(isPresented: self.$show) {
-                DataView(show: self.$show)
+                DataView()
             }
         }
         .onReceive(self.dataVM.$error, perform: { value in

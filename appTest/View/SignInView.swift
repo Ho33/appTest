@@ -77,7 +77,6 @@ struct SignInView: View {
             })
             .onReceive(self.registrationVM.$alreadySignIn, perform: { value in
                 if value {
-                    self.showModal = false
                     self.login = true
                 }
             })

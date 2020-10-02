@@ -20,6 +20,7 @@ struct SignUpView: View {
     
     @Binding var login : Bool
     
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         
@@ -38,22 +39,24 @@ struct SignUpView: View {
             }
             .padding()
             .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.1))
+            .padding(.top,30)
             Spacer()
-            
-        }.padding(.vertical, 300)
+        }
+        .padding(.vertical, 170)
         .alert(isPresented: self.$errorAlert.0) {
             Alert(title: Text("ERROR") , message: Text(self.errorAlert.1), dismissButton: .default(Text("OK")))
             
         }
-        onReceive(self.registrationVM.$alreadySignIn, perform: { value in
-            if value {
-                self.login = true
-            }
-        })
         .onReceive(self.registrationVM.$error, perform: { value in
             if let error = value{
                 self.errorAlert.0.toggle()
                 self.errorAlert.1 = error.localizedDescription
+            }
+        })
+        .onReceive(self.registrationVM.$alreadySignIn, perform: { value in
+            if value {
+                self.login.toggle()
+                self.presentationMode.wrappedValue.dismiss()
             }
         })
         
