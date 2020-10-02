@@ -6,20 +6,27 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct HomePage: View {
     
     @ObservedObject private var registrationVM = RegistrationViewModel()
     @ObservedObject private var dataVM = DataViewModel()
     
-    @Binding var login : Bool
+    @State private var data = [DataModel]()
+    @State private var errorAlert : (Bool,String) = (false,"")
+    
     @State var show : Bool = false
+    
+    @Binding var login : Bool
+    
     
     var body: some View {
         NavigationView{
             ZStack{
                 List {
-                    ForEach(self.dataVM.data){ item in
+                    ForEach(self.data){ item in
+                        
                         VStack (alignment: .leading) {
                             Text(item.title)
                                 .font(.title)
@@ -27,38 +34,54 @@ struct HomePage: View {
                             Text(item.name)
                             Text(item.body)
                             Text(item.email)
-                            }
                         }
                     }
-            VStack {
-                Spacer()
-                HStack {
+                }
+                VStack {
                     Spacer()
-                    Button(action:{
-                        self.show.toggle()
-                    }){
-                        Image(systemName: "plus")
-                            .font(.title)
-                            .frame(width: 50, height: 50)
-                            .foregroundColor(.white)
-                            .background(Color.blue)
-                            .clipShape(Circle())
-                            .padding()
+                    HStack {
+                        Spacer()
+                        Button(action:{
+                            self.show.toggle()
+                        }){
+                            Image(systemName: "plus")
+                                .font(.title)
+                                .frame(width: 50, height: 50)
+                                .foregroundColor(.white)
+                                .background(Color.blue)
+                                .clipShape(Circle())
+                                .padding()
+                        }
                     }
                 }
+            }.navigationBarItems(trailing:
+                                    Button(action: {
+                                        self.registrationVM.signOut()
+                                    }, label: {
+                                        Text("Sign Out")
+                                    })
+            )
+            .sheet(isPresented: self.$show) {
+                DataView(show: self.$show)
             }
-        }.navigationBarItems(trailing:
-                                Button(action: { self.registrationVM.signOut()
-                                    self.login.toggle()
-                                }, label: {
-                                    Text("Sign Out")
-                                })
-        )
-        .sheet(isPresented: self.$show) {
-            DataView(show: self.$show)
         }
+        .onReceive(self.dataVM.$error, perform: { value in
+            if let error = value {
+                self.errorAlert.0.toggle()
+                self.errorAlert.1 = error.localizedDescription
+            }
+        })
+        
+        .onReceive(self.dataVM.$data, perform: { value in
+            self.data = value
+        })
+        
+        .onReceive(self.registrationVM.$alreadySignIn, perform: { value in
+            if value {
+                self.login = false
+            }
+        })
     }
-}
 }
 
 

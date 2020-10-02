@@ -11,67 +11,43 @@ import Firebase
 
 class RegistrationViewModel : ObservableObject {
     
-    private let utilitie = Utilitie()
+    private let utilities = Utilities()
     private let fireAuth = FirebaseAuth.Auth.auth()
     
-    
-    @Published var email: String = ""
-    @Published var password : String = ""
-    @Published var confirmPassword:String = ""
-    @Published var textError : String = ""
-    @Published var hasError: Bool = false
+    @Published var error : Error? = nil
     @Published var alreadySignIn : Bool = false
     @Published var signUpModal : Bool = false
+    @Published var userUid : String = ""
     
     
-    
-    
-    func createUser(){
-        self.toogleError()
-        if self.password.elementsEqual(self.confirmPassword) {
-            self.fireAuth.createUser(withEmail: self.email, password: self.password) { (user, error : Error?) in
-                if let error = error {
-                    self.setError(error: error)
+    func createUser(email: String, password: String , confirmPassword : String) -> Void{
+        if password.elementsEqual(confirmPassword) {
+            self.fireAuth.createUser(withEmail: email, password: password) { (user, error : Error?) in
+                if let error = error{
+                    self.error = error
+                }else{
+                    print("hola")
+                    self.alreadySignIn.toggle()
+                    self.utilities.setUserDefault(bol: true, name: "loguedIn")
                 }
-                self.utilitie.setUserDefault(bol: true, name: "loguedIn")
             }
-        }else{
-            self.textError = "Password dont match"
         }
     }
     
-    func singIn() {
-        self.toogleError()
-        self.fireAuth.signIn(withEmail: self.email, password: self.password) { (user, error : Error?) in
+    func singIn(email: String, password : String) -> Void{
+        self.fireAuth.signIn(withEmail: email, password: password) { (user, error : Error?) in
             if let error = error{
-                self.setError(error: error)
+                self.error = error
             }else{
-                self.utilitie.setUserDefault(bol: true, name: "loguedIn")
+                self.alreadySignIn.toggle()
+                self.utilities.setUserDefault(bol: true, name: "loguedIn")
             }
         }
     }
     
-    func getCurrentUser() -> User? {
-        return self.fireAuth.currentUser
-    }
-    
-     func signOut() {
+    func signOut() -> Void {
         try? self.fireAuth.signOut()
+        self.alreadySignIn.toggle()
         UserDefaults.standard.removeObject(forKey: "loguedIn")
-    }
-    
-    func getUserEmail() -> String {
-        return self.fireAuth.currentUser!.email!
-    }
-    
-    private func toogleError () {
-        if self.hasError {
-            self.hasError.toggle()
-        }
-    }
-    
-    private func setError(error: Error){
-        self.textError = error.localizedDescription
-        self.hasError.toggle()
     }
 }

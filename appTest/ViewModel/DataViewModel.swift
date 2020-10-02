@@ -11,12 +11,9 @@ import Firebase
 
 class DataViewModel: ObservableObject {
     
-    private var authController = RegistrationViewModel()
     
-    @Published var tittle: String = ""
-    @Published var name : String = ""
-    @Published var body: String = ""
-    @Published var textError: String = ""
+    @Published var error : Error? = nil
+    @Published var saved : Bool = false
     @Published var data = [DataModel]()
     
     
@@ -26,15 +23,15 @@ class DataViewModel: ObservableObject {
         data.removeAll()
         db.collection("test").addSnapshotListener{ (QuerySnapshot,error) in
             if let error = error {
-                self.textError = error.localizedDescription
+                self.error = error
             }else{
                 for doc in QuerySnapshot!.documents{
                     let value = doc.data()
                     let id = doc.documentID
-                    let tittle = value["tittle"] as? String ?? "EMPTY"
+                    let tittle = value["title"] as? String ?? "EMPTY"
                     let name = value["name"] as? String ?? "EMPTY"
                     let body = value["body"] as? String ?? "EMPTY"
-                    let email = value["email"] as? String ?? "EMPTY"
+                    let email = value["uid"] as? String ?? "EMPTY"
                     
                     DispatchQueue.main.async {
                         let reg = DataModel(id: id, email: email, title: tittle, name: name, body: body)
@@ -45,17 +42,14 @@ class DataViewModel: ObservableObject {
         }
     }
     
-     func saveData(){
-        
-        let data : [String : Any] = ["tittle" : self.tittle, "name": self.name,"email":self.authController.getUserEmail(),"body":self.body]
+    func saveData(title : String,name: String, text: String){
+        let data : [String : Any] = ["title" : title, "name": name, "body": text]
         db.collection("test").addDocument(data: data) { (error) in
             if let error = error {
-                self.textError = error.localizedDescription
+                self.error = error
+            }else{
+                self.saved.toggle()
             }
         }
-    }
-    
-     func getData(){
-        
     }
 }

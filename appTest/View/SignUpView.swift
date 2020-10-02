@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Combine
 
 
 struct SignUpView: View {
@@ -14,19 +13,23 @@ struct SignUpView: View {
     
     @ObservedObject private var registrationVM = RegistrationViewModel()
     
+    @State private var email : String = ""
+    @State private var password : String = ""
+    @State private var confirmPassword : String = ""
+    @State private var errorAlert : (Bool, String) = (show: false, text: "")
+    
     @Binding var login : Bool
+    
     
     var body: some View {
         
         VStack {
             Text("REGISTER").font(.system(size: 40)).fontWeight(.ultraLight).padding().frame(width:220 , height:60)
-            SingleFormView(fieldName: "Email", fieldValue: self.$registrationVM.email, isProtected: false)
-            SingleFormView(fieldName: "Password", fieldValue: self.$registrationVM.password,isProtected: true)
-            SingleFormView(fieldName: "Confirm Password", fieldValue:  self.$registrationVM.confirmPassword, isProtected: true)
-            Button(action: { self.registrationVM.createUser()
-                if self.registrationVM.getCurrentUser() != nil {
-                    self.login.toggle()
-                }
+            SingleFormView(fieldName: "Email", fieldValue: self.$email, isProtected: false)
+            SingleFormView(fieldName: "Password", fieldValue: self.$password,isProtected: true)
+            SingleFormView(fieldName: "Confirm Password", fieldValue:  self.$confirmPassword, isProtected: true)
+            Button(action: {
+                self.registrationVM.createUser(email: self.email, password: self.password, confirmPassword: self.confirmPassword)
             }) {
                 Text("SIGN IN")
                     .frame(width: 250 , height: 55)
@@ -38,9 +41,22 @@ struct SignUpView: View {
             Spacer()
             
         }.padding(.vertical, 300)
-        .alert(isPresented: self.$registrationVM.hasError) {
-            Alert(title: Text("ERROR") , message: Text(self.registrationVM.textError), dismissButton: .default(Text("OK")))
+        .alert(isPresented: self.$errorAlert.0) {
+            Alert(title: Text("ERROR") , message: Text(self.errorAlert.1), dismissButton: .default(Text("OK")))
+            
         }
+        onReceive(self.registrationVM.$alreadySignIn, perform: { value in
+            if value {
+                self.login = true
+            }
+        })
+        .onReceive(self.registrationVM.$error, perform: { value in
+            if let error = value{
+                self.errorAlert.0.toggle()
+                self.errorAlert.1 = error.localizedDescription
+            }
+        })
+        
     }
 }
 

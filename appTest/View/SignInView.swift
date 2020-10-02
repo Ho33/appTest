@@ -6,14 +6,19 @@
 //
 
 import SwiftUI
-import Combine
 
 struct SignInView: View {
     
     @ObservedObject private var registrationVM = RegistrationViewModel()
     
-    @Binding var login : Bool
-        
+    @State private var email : String = ""
+    @State private var password : String = ""
+    @State private var errorAlert : (Bool, String) = (false,"")
+    
+    @State var showModal : Bool = false
+    
+    @Binding  var login : Bool
+    
     var body: some View {
         
         NavigationView {
@@ -30,13 +35,11 @@ struct SignInView: View {
                 Spacer()
                 
                 VStack {
-                    SingleFormView(fieldName: "Email", fieldValue: self.$registrationVM.email, isProtected: false)
-                    SingleFormView(fieldName: "Password", fieldValue: self.$registrationVM.password, isProtected: true)
+                    SingleFormView(fieldName: "Email", fieldValue: self.$email, isProtected: false)
+                    SingleFormView(fieldName: "Password", fieldValue: self.$password, isProtected: true)
                     Button(action: {
-                            self.registrationVM.singIn()
-                            if self.registrationVM.getCurrentUser() != nil {
-                            self.login.toggle()
-                        }
+                        self.registrationVM.singIn(email: self.email,password: self.password)
+                        
                     }) {
                         Text("LOGIN").frame(width: 350 , height: 55)
                             .foregroundColor(Color.white).background(Color.gray)
@@ -52,24 +55,37 @@ struct SignInView: View {
                         Text("Create an account").foregroundColor(Color.black.opacity(0.6))
                         
                         Button(action: {
-                            self.registrationVM.signUpModal.toggle()
+                            self.showModal.toggle()
                         }){
                             Text("Here!")
-                        }.sheet(isPresented: self.$registrationVM.signUpModal) {
+                        }.sheet(isPresented: self.$showModal) {
                             SignUpView(login: self.$login)
                         }
                         
                     }.padding(.bottom,200)
                     
-                }.padding()
-            .alert(isPresented: self.$registrationVM.hasError) {
-                        Alert(title: Text("ERROR") , message: Text(self.registrationVM.textError) , dismissButton: .default(Text("OK")))
+            }.padding()
+            .alert(isPresented: self.$errorAlert.0) {
+                Alert(title: Text("ERROR") , message: Text(self.errorAlert.1), dismissButton: .default(Text("OK")))
+            
             }
-                Spacer(minLength: 0 )
+            .onReceive(self.registrationVM.$error, perform: { value in
+                if let error = value{
+                    self.errorAlert.0.toggle()
+                    self.errorAlert.1 = error.localizedDescription
+                }
+            })
+            .onReceive(self.registrationVM.$alreadySignIn, perform: { value in
+                if value {
+                    self.showModal = false
+                    self.login = true
+                }
+            })
         }
     }
 }
-    
+
+
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
