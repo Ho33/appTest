@@ -21,6 +21,8 @@ struct HomePage: View {
     @Binding var login : Bool
     
     
+    
+    
     var body: some View {
         NavigationView{
             ZStack{
@@ -35,8 +37,11 @@ struct HomePage: View {
                             Text(item.body)
                             Text(item.email)
                         }
-                    }
+                    }.onDelete(perform: { index in
+                        self.dataVM.deleteSelected(index : index)
+                    })
                 }
+                
                 VStack {
                     Spacer()
                     HStack {

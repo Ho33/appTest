@@ -20,11 +20,12 @@ class DataViewModel: ObservableObject {
     private let db = Firestore.firestore()
     
     init() {
-        data.removeAll()
+        
         db.collection("test").addSnapshotListener{ (QuerySnapshot,error) in
             if let error = error {
                 self.error = error
             }else{
+                self.data.removeAll()
                 for doc in QuerySnapshot!.documents{
                     let value = doc.data()
                     let id = doc.documentID
@@ -51,5 +52,11 @@ class DataViewModel: ObservableObject {
                 self.saved.toggle()
             }
         }
+    }
+    
+     func deleteSelected( index: IndexSet) {
+        let id = self.data[index.first!].id
+        db.collection("test").document(id).delete()
+        self.data.remove(atOffsets: index)
     }
 }
