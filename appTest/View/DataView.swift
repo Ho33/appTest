@@ -47,17 +47,18 @@ struct DataView: View {
             Alert(title: Text("ERROR") , message: Text(self.errorAlert.1), dismissButton: .default(Text("OK")))
         
         }
+        .onReceive(self.dataVM.$saved, perform: { value in
+            if value {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        })
         .onReceive(self.dataVM.$error, perform: { value in
             if let error = value{
                 self.errorAlert.0.toggle()
                 self.errorAlert.1 = error.localizedDescription
             }
         })
-        .onReceive(self.dataVM.$saved, perform: { value in
-            if value {
-                self.presentationMode.wrappedValue.dismiss()
-            }
-        })
+        
     }
 }
 

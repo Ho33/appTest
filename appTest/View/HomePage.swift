@@ -29,7 +29,7 @@ struct HomePage: View {
                 List {
                     ForEach(self.data){ item in
                         NavigationLink(destination: EditView(item: item)){
-                            VStack (alignment: .leading) {
+                            VStack () {
                                 Text(item.title)
                                     .font(.title)
                                     .bold()
@@ -40,6 +40,7 @@ struct HomePage: View {
                     }.onDelete(perform: { index in
                         self.dataVM.deleteSelected(index : index)
                     })
+                    
                 }
                 VStack {
                     Spacer()

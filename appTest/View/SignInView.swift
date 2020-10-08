@@ -19,6 +19,8 @@ struct SignInView: View {
     
     @Binding  var login : Bool
     
+    
+    
     var body: some View {
         
         NavigationView {
@@ -44,32 +46,32 @@ struct SignInView: View {
                         Text("LOGIN").frame(width: 350 , height: 55)
                             .foregroundColor(Color.white).background(Color.gray)
                             .cornerRadius(30.0)
-
+                        
                     }.padding()
                     .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.1))
                 }
-                    Spacer()
+                Spacer()
+                
+                HStack(spacing: 12){
                     
-                    HStack(spacing: 12){
-                        
-                        Text("Create an account").foregroundColor(Color.black.opacity(0.6))
-                        
-                        Button(action: {
-                            self.showModal.toggle()
-                        }){
-                            Text("Here!")
-                        }.sheet(isPresented: self.$showModal) {
-                            SignUpView(login: self.$login)
-                        }
-                        
-                    }.padding(.bottom,200)
+                    Text("Create an account").foregroundColor(Color.black.opacity(0.6))
                     
+                    Button(action: {
+                        self.showModal.toggle()
+                    }){
+                        self.navigationSignUp()
+                        //Text("Here!")
+                    }.sheet(isPresented: self.$showModal) {
+                        SignUpView(login: self.$login)
+                    }
+                    
+                }.padding(.bottom,200)
+                
             }.padding()
             .alert(isPresented: self.$errorAlert.0) {
                 Alert(title: Text("ERROR") , message: Text(self.errorAlert.1), dismissButton: .default(Text("OK")))
-            
-            }
-            .onReceive(self.registrationVM.$error, perform: { value in
+                
+            }   .onReceive(self.registrationVM.$error, perform: { value in
                 if let error = value{
                     self.errorAlert.0.toggle()
                     self.errorAlert.1 = error.localizedDescription
@@ -81,6 +83,13 @@ struct SignInView: View {
                 }
             })
         }
+    }
+    fileprivate func navigationSignUp() -> NavigationLink<Text, SignUpView> {
+        return NavigationLink(
+            destination: SignUpView(login: self.$login),
+            label: {
+                Text("HERE!")
+            })
     }
 }
 

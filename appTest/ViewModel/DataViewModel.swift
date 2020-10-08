@@ -62,9 +62,8 @@ class DataViewModel: ObservableObject {
     }
     
     func editSelected(item:DataModel, title:String, name:String, text:String){
-        let id = item.id
         let data : [String : Any] = ["title" : title, "name": name, "text": text]
-        db.collection("test").document(id).updateData(data) {(error) in
+        db.collection("test").document(item.id).updateData(data) {(error) in
             if let error = error {
                 self.error = error
             }else{

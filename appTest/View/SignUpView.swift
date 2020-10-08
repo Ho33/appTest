@@ -59,7 +59,6 @@ struct SignUpView: View {
                 self.presentationMode.wrappedValue.dismiss()
             }
         })
-        
     }
 }
 
