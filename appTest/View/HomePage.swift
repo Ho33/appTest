@@ -95,7 +95,7 @@ struct HomePage: View {
             })
             
             // Slide menu
-            UserDetailsView()
+            UserSlideMenu(login: self.$login)
                 .onAppear(perform: {
                     self.offset = geometry.size.width * -1
                     self.closeOffset = self.offset

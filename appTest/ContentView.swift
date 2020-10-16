@@ -14,13 +14,11 @@ struct ContentView: View {
     var body: some View {
         
         return Group{
-            
-            if login {
+            if self.login {
                 HomePage(login: self.$login)
-            }else {
+            } else {
                 SignInView(login: self.$login)
             }
-            
         }.onAppear{
             if UserDefaults.standard.object(forKey: "loguedIn") != nil{
                 self.login = true

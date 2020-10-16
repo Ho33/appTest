@@ -18,6 +18,7 @@ class RegistrationViewModel : ObservableObject {
     @Published var alreadySignIn : Bool = false
     @Published var signUpModal : Bool = false
     @Published var userUid : String = ""
+    @Published var user : User?
     
     
     func createUser(email: String, password: String , confirmPassword : String) -> Void{
@@ -26,9 +27,7 @@ class RegistrationViewModel : ObservableObject {
                 if let error = error{
                     self.error = error
                 }else{
-                    print("hola")
-                    self.alreadySignIn.toggle()
-                    self.utilities.setUserDefault(bol: true, name: "loguedIn")
+                    self.userStatus()
                 }
             }
         }
@@ -39,15 +38,26 @@ class RegistrationViewModel : ObservableObject {
             if let error = error{
                 self.error = error
             }else{
-                self.alreadySignIn.toggle()
-                self.utilities.setUserDefault(bol: true, name: "loguedIn")
+                self.userStatus()
             }
         }
     }
     
     func signOut() -> Void {
         try? self.fireAuth.signOut()
-        self.alreadySignIn.toggle()
+        self.userStatus()
         UserDefaults.standard.removeObject(forKey: "loguedIn")
+    }
+    
+    private func userStatus(){
+        self.fireAuth.addStateDidChangeListener { auth, user in
+          if let user = user {
+            self.user = user
+            self.alreadySignIn.toggle()
+            self.utilities.setSessionStatus(bol: true, name: "loguedIn")
+          } else {
+            self.alreadySignIn.toggle()
+          }
+        }
     }
 }
