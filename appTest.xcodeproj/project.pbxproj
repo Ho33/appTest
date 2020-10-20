@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		934C460725307200006CF643 /* UserDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C460625307200006CF643 /* UserDetailsView.swift */; };
+		934C460725307200006CF643 /* UserSlideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C460625307200006CF643 /* UserSlideMenu.swift */; };
+		934D5464253F01300077D13B /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934D5463253F01300077D13B /* SessionStore.swift */; };
 		935880152527900300FDC1B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 935880142527900300FDC1B0 /* GoogleService-Info.plist */; };
 		935880182527908600FDC1B0 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935880172527908600FDC1B0 /* Utilities.swift */; };
 		937CB6EB251A615B009453C4 /* appTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937CB6EA251A615B009453C4 /* appTestApp.swift */; };
@@ -16,6 +17,7 @@
 		937CB6F2251A615D009453C4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 937CB6F1251A615D009453C4 /* Preview Assets.xcassets */; };
 		937CB729251A7009009453C4 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937CB728251A7009009453C4 /* RegistrationViewModel.swift */; };
 		937CB72C251A7061009453C4 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937CB72B251A7061009453C4 /* SignUpView.swift */; };
+		937D44B92538AACE00FCEE6E /* SingleSlideButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937D44B82538AACE00FCEE6E /* SingleSlideButtonView.swift */; };
 		9383D15E2523A460005C0992 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9383D15D2523A460005C0992 /* DataView.swift */; };
 		93B84A76251B440E004EB83D /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B84A75251B440E004EB83D /* SignInView.swift */; };
 		93B84A7A251B4C55004EB83D /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B84A79251B4C55004EB83D /* HomePage.swift */; };
@@ -30,7 +32,8 @@
 /* Begin PBXFileReference section */
 		2484FCB87523B1DCE42175C9 /* Pods-appTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appTest.debug.xcconfig"; path = "Target Support Files/Pods-appTest/Pods-appTest.debug.xcconfig"; sourceTree = "<group>"; };
 		6064D003E3CE711A67D04957 /* Pods_appTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_appTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		934C460625307200006CF643 /* UserDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsView.swift; sourceTree = "<group>"; };
+		934C460625307200006CF643 /* UserSlideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSlideMenu.swift; sourceTree = "<group>"; };
+		934D5463253F01300077D13B /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
 		935880142527900300FDC1B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		935880172527908600FDC1B0 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		937CB6E7251A615B009453C4 /* appTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = appTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +44,7 @@
 		937CB6F3251A615D009453C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		937CB728251A7009009453C4 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		937CB72B251A7061009453C4 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		937D44B82538AACE00FCEE6E /* SingleSlideButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSlideButtonView.swift; sourceTree = "<group>"; };
 		9383D15D2523A460005C0992 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
 		93B84A75251B440E004EB83D /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		93B84A79251B4C55004EB83D /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
@@ -142,7 +146,8 @@
 				93B84A75251B440E004EB83D /* SignInView.swift */,
 				9383D15D2523A460005C0992 /* DataView.swift */,
 				93D15B86252749F300DFE38B /* EditView.swift */,
-				934C460625307200006CF643 /* UserDetailsView.swift */,
+				934C460625307200006CF643 /* UserSlideMenu.swift */,
+				937D44B82538AACE00FCEE6E /* SingleSlideButtonView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -151,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				935880172527908600FDC1B0 /* Utilities.swift */,
+				934D5463253F01300077D13B /* SessionStore.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -287,10 +293,12 @@
 				93BB70A12523423C00AD3522 /* DataModel.swift in Sources */,
 				9383D15E2523A460005C0992 /* DataView.swift in Sources */,
 				93D15B87252749F300DFE38B /* EditView.swift in Sources */,
-				934C460725307200006CF643 /* UserDetailsView.swift in Sources */,
+				937D44B92538AACE00FCEE6E /* SingleSlideButtonView.swift in Sources */,
+				934C460725307200006CF643 /* UserSlideMenu.swift in Sources */,
 				937CB6EB251A615B009453C4 /* appTestApp.swift in Sources */,
 				93B84A7A251B4C55004EB83D /* HomePage.swift in Sources */,
 				937CB729251A7009009453C4 /* RegistrationViewModel.swift in Sources */,
+				934D5464253F01300077D13B /* SessionStore.swift in Sources */,
 				93BB70A4252345F700AD3522 /* ErrorViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

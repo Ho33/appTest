@@ -12,9 +12,10 @@ import Firebase
 @main
 struct appTestApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(SessionStore())
         }
     }
 }
@@ -26,5 +27,6 @@ final class AppDelegate:NSObject, UIApplicationDelegate {
         return true
     }
 }
+
 
 

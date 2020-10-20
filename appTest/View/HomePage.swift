@@ -21,7 +21,6 @@ struct HomePage: View {
     @State private var openOffset = CGFloat.zero
     @State private var disableView = true
     
-    @Binding var login : Bool
     
     var body: some View {
         GeometryReader { geometry in
@@ -88,14 +87,10 @@ struct HomePage: View {
             .onReceive(self.dataVM.$data, perform: { value in
                 self.data = value
             })
-            .onReceive(self.registrationVM.$alreadySignIn, perform: { value in
-                if value {
-                    self.login = false
-                }
-            })
+            
             
             // Slide menu
-            UserDetailsView()
+            UserSlideMenu()
                 .onAppear(perform: {
                     self.offset = geometry.size.width * -1
                     self.closeOffset = self.offset
@@ -128,6 +123,6 @@ struct HomePage: View {
 
 struct HomePage_Previews: PreviewProvider {
     static var previews: some View {
-        HomePage(login: .constant(false))
+        HomePage()
     }
 }

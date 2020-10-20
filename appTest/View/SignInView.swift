@@ -17,10 +17,6 @@ struct SignInView: View {
     
     @State var showModal : Bool = false
     
-    @Binding  var login : Bool
-    
-    
-    
     var body: some View {
         
         NavigationView {
@@ -62,7 +58,7 @@ struct SignInView: View {
                         self.navigationSignUp()
                         //Text("Here!")
                     }.sheet(isPresented: self.$showModal) {
-                        SignUpView(login: self.$login)
+                        SignUpView()
                     }
                     
                 }.padding(.bottom,200)
@@ -77,16 +73,11 @@ struct SignInView: View {
                     self.errorAlert.1 = error.localizedDescription
                 }
             })
-            .onReceive(self.registrationVM.$alreadySignIn, perform: { value in
-                if value {
-                    self.login = true
-                }
-            })
         }
     }
     fileprivate func navigationSignUp() -> NavigationLink<Text, SignUpView> {
         return NavigationLink(
-            destination: SignUpView(login: self.$login),
+            destination: SignUpView(),
             label: {
                 Text("HERE!")
             })
@@ -97,6 +88,6 @@ struct SignInView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView(login: .constant(false))
+        SignInView()
     }
 }
