@@ -18,8 +18,6 @@ struct SignUpView: View {
     @State private var confirmPassword : String = ""
     @State private var errorAlert : (Bool, String) = (show: false, text: "")
     
-    @Binding var login : Bool
-    
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -53,17 +51,12 @@ struct SignUpView: View {
                 self.errorAlert.1 = error.localizedDescription
             }
         })
-        .onReceive(self.registrationVM.$alreadySignIn, perform: { value in
-            if value {
-                self.login.toggle()
-                self.presentationMode.wrappedValue.dismiss()
-            }
-        })
+        
     }
 }
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView(login: .constant(false))
+        SignUpView()
     }
 }

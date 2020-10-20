@@ -18,8 +18,6 @@ struct DataView: View {
     @State private var userUid : String = ""
     @State private var errorAlert : (Bool,String) = (false,"")
     
-    //@Binding var show : Bool
-    
     @Environment(\.presentationMode) var presentationMode
     
     

@@ -9,9 +9,10 @@ import SwiftUI
 
 struct UserSlideMenu: View {
     
-   @ObservedObject private var registrationVM = RegistrationViewModel()
+    @EnvironmentObject var session : SessionStore
     
-    @Binding var login : Bool
+    @ObservedObject private var registrationVM = RegistrationViewModel()
+    
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -21,7 +22,7 @@ struct UserSlideMenu: View {
                     Circle().stroke(Color.black, lineWidth: 1))
                 .frame(width: 60, height: 60)
                 .clipShape(Circle())
-            Text("user name")
+            Text(session.user?.email ?? "")
                 .font(.largeTitle)
             Divider()
             Group{
@@ -53,12 +54,7 @@ struct UserSlideMenu: View {
                 SingleSlideButtonView(buttonName: "Sign Out", image: "arrowshape.turn.up.left.circle", bColor: .black)
             }
             .padding(.bottom,25)
-        }.onReceive(self.registrationVM.$alreadySignIn, perform: { value in
-            if value {
-                self.login = false
-            }
-        })
-            
+        }
            .padding(EdgeInsets(top: 45, leading: 20, bottom: 0, trailing: 0))
            .frame(width: UIScreen.main.bounds.width / 1.5)
            .background(Color.white)
@@ -70,6 +66,6 @@ struct UserSlideMenu: View {
 
 struct UserDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        UserSlideMenu(login: .constant(false))
+        UserSlideMenu()
     }
 }
