@@ -9,27 +9,31 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var login = false
+    @EnvironmentObject var session: SessionStore
     
     var body: some View {
         
-        return Group{
-            if self.login {
-                HomePage(login: self.$login)
+        Group{
+            if session.user != nil {
+                HomePage()
             } else {
-                SignInView(login: self.$login)
+                SignInView()
             }
-        }.onAppear{
-            if UserDefaults.standard.object(forKey: "loguedIn") != nil{
-                self.login = true
+        }.onAppear(
+            perform: {
+                userState()
             }
-        }
+        )
+    }
+    
+    func userState () {
+        session.listen()
     }
 }
 
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-        
+        ContentView().environmentObject(SessionStore())
     }
 }
