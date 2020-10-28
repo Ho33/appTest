@@ -15,7 +15,7 @@ struct ContentView: View {
         
         Group{
             if session.user != nil {
-                HomePage()
+                SliderSelectedButtonView()
             } else {
                 SignInView()
             }

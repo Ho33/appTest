@@ -12,7 +12,7 @@ struct UserSlideMenu: View {
     @EnvironmentObject var session : SessionStore
     
     @ObservedObject private var registrationVM = RegistrationViewModel()
-    
+    @ObservedObject private var sliderButtonVM = SilderButtonViewModel()
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -27,22 +27,27 @@ struct UserSlideMenu: View {
             Divider()
             Group{
                 Button(action: {
-                    
+                    changueCurrentButton(index: 0)
+                }){
+                    SingleSlideButtonView(buttonName: "Home", image: "house", bColor: .black)
+                }
+                Button(action: {
+                    changueCurrentButton(index: 1)
                 }){
                     SingleSlideButtonView(buttonName: "Profile", image: "person.crop.circle", bColor: .black)
                 }
                 Button(action: {
-                    
+                    changueCurrentButton(index: 2)
                 }){
                     SingleSlideButtonView(buttonName: "Training History", image: "bolt.heart", bColor: .black)
                 }
                 Button(action: {
-                    
+                    changueCurrentButton(index: 3)
                 }){
                     SingleSlideButtonView(buttonName: "Schedoule", image: "calendar.badge.clock", bColor: .black)
                 }
                 Button(action: {
-                    
+                    changueCurrentButton(index: 4)
                 }){
                     SingleSlideButtonView(buttonName: "Setting", image: "gear", bColor: .black)
                 }
@@ -61,6 +66,9 @@ struct UserSlideMenu: View {
            .edgesIgnoringSafeArea(.all)
            .overlay(Rectangle().stroke(Color.primary.opacity(0.2),lineWidth: 2).shadow(radius: 3).edgesIgnoringSafeArea(.all))
            
+    }
+    func changueCurrentButton(index : Int) {
+        self.sliderButtonVM.currentButton = index
     }
 }
 
