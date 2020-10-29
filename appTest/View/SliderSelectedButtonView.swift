@@ -12,7 +12,7 @@ struct SliderSelectedButtonView: View {
     
     @ObservedObject private var registrationVM = RegistrationViewModel()
     @ObservedObject private var dataVM = DataViewModel()
-    @ObservedObject private var sliderButtonVM = SilderButtonViewModel()
+    @ObservedObject private var indexButton = SilderButtonViewModel.shared
     
     @State private var data = [DataModel]()
     @State private var errorAlert : (Bool,String) = (false,"")
@@ -23,11 +23,11 @@ struct SliderSelectedButtonView: View {
     @State private var disableView = true
     @State private var currentButton : Int = 0
     
-    
+   
     var body: some View {
         GeometryReader { geometry in
                 NavigationView {
-                    HomeView()
+                    self.getView()
                         .allowsHitTesting(disableView)
                         .navigationBarItems(leading: Button(action: {
                             self.disableView = false
@@ -36,17 +36,17 @@ struct SliderSelectedButtonView: View {
                             Image(systemName: "list.bullet")
                         })
                         .edgesIgnoringSafeArea(.top)
-                }.onReceive(sliderButtonVM.$currentButton, perform: { value in
-                        
-                    })
+                }.onReceive(self.indexButton.$currentButton){ value in
+                    self.currentButton = value
+                    setSliderMenuClosed(geometry: geometry)
+                    print(value,"current button")
+                }
                 Spacer()
             
             // Slide menu
             UserSlideMenu()
                 .onAppear(perform: {
-                    self.offset = geometry.size.width * -1
-                    self.closeOffset = self.offset
-                    self.openOffset = .zero
+                    setSliderMenuClosed(geometry: geometry)
                 })
                 .offset(x: self.offset)
                 .animation(.default)
@@ -67,9 +67,32 @@ struct SliderSelectedButtonView: View {
                         }
                     }
         )
-        
+    }
+    fileprivate func setSliderMenuClosed(geometry: GeometryProxy) {
+        self.offset = geometry.size.width * -1
+        self.closeOffset = self.offset
+        self.openOffset = .zero
+        self.disableView = true
+   }
+    
+    func getView() -> AnyView {
+        switch self.currentButton {
+            case 0:
+                return AnyView(HomeView())
+            case 1:
+                return AnyView(ProfileView())
+            case 2:
+                return AnyView(HistoryView())
+            case 3:
+                return AnyView(SchedouleView())
+            case 4:
+                return AnyView(SettingsView())
+            default:
+                return AnyView(HomeView())
         }
+    }
 }
+
 
 
 

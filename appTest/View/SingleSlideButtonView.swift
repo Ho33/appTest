@@ -12,17 +12,18 @@ struct SingleSlideButtonView: View {
     var buttonName : String
     var image : String
     var bColor : Color
+    var selectedButtonColor : Color?
     
     var body: some View {
 
                 HStack(spacing: 22){
-                    Image(systemName: image)
+                    Image(systemName: self.image)
                         .resizable()
                         .frame(width: 25, height: 25)
-                        .foregroundColor(bColor)
-                    
-                    Text(buttonName).foregroundColor(.black)
+                        .foregroundColor(self.selectedButtonColor ?? self.bColor)
+                        
+                    Text(self.buttonName).foregroundColor(self.bColor)
                 }
-                .padding(.top,25)
+                .padding(.top,25)                
             }
 }

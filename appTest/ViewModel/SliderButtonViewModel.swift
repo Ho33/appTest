@@ -6,13 +6,17 @@
 //
 
 import Combine
-
+import SwiftUI
 
 
 class SilderButtonViewModel : ObservableObject {
-    
+
+    static let shared = SilderButtonViewModel()
+    private init() {}
     
     @Published var currentButton : Int = 0
     
-    
+    func setIndexCurrentButton (index: Int){
+        self.currentButton = index
+    }
 }
