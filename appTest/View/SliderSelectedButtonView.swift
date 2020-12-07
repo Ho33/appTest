@@ -9,9 +9,7 @@ import SwiftUI
 import Firebase
 
 struct SliderSelectedButtonView: View {
-    
-    @ObservedObject private var registrationVM = RegistrationViewModel()
-    @ObservedObject private var dataVM = DataViewModel()
+        
     @ObservedObject private var indexButton = SilderButtonViewModel.shared
     
     @State private var data = [DataModel]()
@@ -50,23 +48,41 @@ struct SliderSelectedButtonView: View {
                 })
                 .offset(x: self.offset)
                 .animation(.default)
-        }.gesture(DragGesture(minimumDistance: 5)
-                    .onChanged{ value in
-                        if (self.offset < self.openOffset) {
-                            self.disableView = false
-                            self.offset = self.closeOffset + value.translation.width
-                        }
-                    }
-                    .onEnded { value in
-                        if (value.location.x > value.startLocation.x) {
-                            self.disableView = false
-                            self.offset = self.openOffset
-                        } else {
-                            self.disableView = true
-                            self.offset = self.closeOffset
-                        }
-                    }
-        )
+                .gesture(DragGesture(minimumDistance: 5)
+                            .onChanged{ value in
+                                if (self.offset < self.openOffset) {
+                                    self.disableView = false
+                                    self.offset = self.closeOffset + value.translation.width
+                                }
+                            }
+                            .onEnded { value in
+                                if (value.location.x > value.startLocation.x) {
+                                    self.disableView = false
+                                    self.offset = self.openOffset
+                                } else {
+                                    self.disableView = true
+                                    self.offset = self.closeOffset
+                                }
+                            }
+                )
+        }
+//        .gesture(DragGesture(minimumDistance: 5)
+//                    .onChanged{ value in
+//                        if (self.offset < self.openOffset) {
+//                            self.disableView = false
+//                            self.offset = self.closeOffset + value.translation.width
+//                        }
+//                    }
+//                    .onEnded { value in
+//                        if (value.location.x > value.startLocation.x) {
+//                            self.disableView = false
+//                            self.offset = self.openOffset
+//                        } else {
+//                            self.disableView = true
+//                            self.offset = self.closeOffset
+//                        }
+//                    }
+//        )
     }
     fileprivate func setSliderMenuClosed(geometry: GeometryProxy) {
         self.offset = geometry.size.width * -1

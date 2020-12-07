@@ -16,12 +16,14 @@ struct ContentView: View {
         Group{
             if session.user != nil {
                 SliderSelectedButtonView()
+                
             } else {
                 SignInView()
             }
         }.onAppear(
             perform: {
                 userState()
+                
             }
         )
     }

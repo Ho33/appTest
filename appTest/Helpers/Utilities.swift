@@ -14,4 +14,7 @@ struct Utilities {
     func setSessionStatus(bol : Bool, name: String) -> Void {
         UserDefaults.standard.set(bol, forKey: name)
     }
+    func setUser(User: User){
+        UserDefaults.standard.setValue(User.uid, forKey: "userUid")
+    }
 }

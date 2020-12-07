@@ -24,7 +24,6 @@ struct EditView: View {
         VStack {
             Text("EDIT ENTRIE").font(.system(size: 25)).fontWeight(.ultraLight).padding().frame(width:220 , height:60)
             SingleFormView(fieldName: self.item.title , fieldValue: self.$title, isProtected: false)
-            SingleFormView(fieldName: self.item.name , fieldValue: self.$name,isProtected: false)
             SingleFormView(fieldName: self.item.text , fieldValue:  self.$text, isProtected: false)
             Button(action: {
                 self.dataVM.editSelected(item: self.item, title: self.title, name: self.name, text: self.text)
@@ -48,6 +47,6 @@ struct EditView: View {
 
 struct EditView_Previews: PreviewProvider {
     static var previews: some View {
-        EditView(item: DataModel.init(id: "", email: "", title: "", name: "", text: ""))
+        EditView(item: DataModel.init(id: "", email: "", exerciseData: [ExerciseModel.init( name: "", series: "", reps: "", text: "")], title: "", text: ""))
     }
 }

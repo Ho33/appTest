@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CircularProgress
 
 struct HomeView: View {
     @ObservedObject private var registrationVM = RegistrationViewModel()
@@ -17,17 +18,21 @@ struct HomeView: View {
     
     var body: some View {
         
-        TabView{
+//        TabView{
                 ZStack () {
                     List {
                         ForEach(self.data){ item in
                             NavigationLink(destination: EditView(item: item)){
+                                VStack{
                                 HStack () {
-                                    Text(item.title)
-                                        .font(.title)
-                                        .bold()
-                                    Text(item.name)
-                                    Text(item.text)
+                                    CircularProgressView(count: 0, total: 10, progress: 0.5, fontOne: Font.system(size: 50), fontTwo: Font.system(size: 25, weight: .bold, design: .rounded), lineWidth: 5).padding(50)
+                                        
+//                                    Text(item.title)
+//                                        .font(.title)
+//                                        .bold()
+//                                    Text(item.name)
+//                                    Text(item.text)
+                                }
                                 }
                             }
                         }.onDelete(perform: { index in
@@ -39,7 +44,7 @@ struct HomeView: View {
                         HStack {
                             Spacer()
                             Button(action:{
-                                self.show.toggle()
+                                self.dataVM.saved.toggle()
                             }){
                                 Image(systemName: "plus")
                                     .font(.title)
@@ -52,11 +57,10 @@ struct HomeView: View {
                         }
                     }
                 }
+//            }
+        .sheet(isPresented: self.$dataVM.saved) {
+                CreateView()
             }
-            .sheet(isPresented: self.$show) {
-                DataView()
-            }
-        
         .onReceive(self.dataVM.$error, perform: { value in
             if let error = value {
                 self.errorAlert.0.toggle()

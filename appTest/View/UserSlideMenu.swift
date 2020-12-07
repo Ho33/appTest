@@ -12,7 +12,7 @@ struct UserSlideMenu: View {
     @EnvironmentObject var session : SessionStore
     
     @ObservedObject private var registrationVM = RegistrationViewModel()
-    @ObservedObject  private var indexButton = SilderButtonViewModel.shared
+    @ObservedObject private var indexButton = SilderButtonViewModel.shared
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -29,12 +29,15 @@ struct UserSlideMenu: View {
                 Button(action: {
                     changueCurrentButton(index: 0)
                 }){
-                    SingleSlideButtonView(buttonName: "Home", image: "house", bColor: .black)
+                    if indexButton.currentButton == 0{
+                        SingleSlideButtonView(buttonName: "Home", image: "house", bColor: .black, selectedButtonColor: .blue)
+                    }else {
+                        SingleSlideButtonView(buttonName: "Home", image: "house", bColor: .black)
+                    }
                 }
                 Button(action: {
                     changueCurrentButton(index: 1)
                 }){
-                    
                     if indexButton.currentButton == 1{
                         SingleSlideButtonView(buttonName: "Profile", image: "person.crop.circle", bColor: .black, selectedButtonColor: .blue)
                     }else {
@@ -44,17 +47,29 @@ struct UserSlideMenu: View {
                 Button(action: {
                     changueCurrentButton(index: 2)
                 }){
-                    SingleSlideButtonView(buttonName: "Training History", image: "bolt.heart", bColor: .black)
+                    if indexButton.currentButton == 2{
+                        SingleSlideButtonView(buttonName: "Training History", image: "bolt.heart", bColor: .black, selectedButtonColor: .blue)
+                    }else {
+                        SingleSlideButtonView(buttonName: "Training History", image: "bolt.heart", bColor: .black)
+                    }
                 }
                 Button(action: {
                     changueCurrentButton(index: 3)
                 }){
-                    SingleSlideButtonView(buttonName: "Schedoule", image: "calendar.badge.clock", bColor: .black)
+                    if indexButton.currentButton == 3{
+                        SingleSlideButtonView(buttonName: "Schedoule", image: "calendar.badge.clock", bColor: .black, selectedButtonColor: .blue)
+                    }else {
+                        SingleSlideButtonView(buttonName: "Schedoule", image: "calendar.badge.clock", bColor: .black)
+                    }
                 }
                 Button(action: {
                     changueCurrentButton(index: 4)
                 }){
-                    SingleSlideButtonView(buttonName: "Setting", image: "gear", bColor: .black)
+                    if indexButton.currentButton == 4{
+                        SingleSlideButtonView(buttonName: "Setting", image: "gear", bColor: .black, selectedButtonColor: .blue)
+                    }else {
+                        SingleSlideButtonView(buttonName: "Setting", image: "gear", bColor: .black)
+                    }
                 }
             }
             

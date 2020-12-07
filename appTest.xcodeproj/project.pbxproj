@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,9 @@
 		934E8AF225499D9E00D9E76E /* SliderButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934E8AF125499D9E00D9E76E /* SliderButtonViewModel.swift */; };
 		935880152527900300FDC1B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 935880142527900300FDC1B0 /* GoogleService-Info.plist */; };
 		935880182527908600FDC1B0 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935880172527908600FDC1B0 /* Utilities.swift */; };
+		9366A205257EAFD400B2AC38 /* CircularProgress in Frameworks */ = {isa = PBXBuildFile; productRef = 9366A204257EAFD400B2AC38 /* CircularProgress */; };
+		9366A209257ED47D00B2AC38 /* addExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9366A208257ED47D00B2AC38 /* addExerciseView.swift */; };
+		9366A20C257ED5BC00B2AC38 /* ExerciseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9366A20B257ED5BB00B2AC38 /* ExerciseModel.swift */; };
 		937CB6EB251A615B009453C4 /* appTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937CB6EA251A615B009453C4 /* appTestApp.swift */; };
 		937CB6ED251A615B009453C4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937CB6EC251A615B009453C4 /* ContentView.swift */; };
 		937CB6EF251A615D009453C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 937CB6EE251A615D009453C4 /* Assets.xcassets */; };
@@ -24,7 +27,7 @@
 		937CB729251A7009009453C4 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937CB728251A7009009453C4 /* RegistrationViewModel.swift */; };
 		937CB72C251A7061009453C4 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937CB72B251A7061009453C4 /* SignUpView.swift */; };
 		937D44B92538AACE00FCEE6E /* SingleSlideButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937D44B82538AACE00FCEE6E /* SingleSlideButtonView.swift */; };
-		9383D15E2523A460005C0992 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9383D15D2523A460005C0992 /* DataView.swift */; };
+		9383D15E2523A460005C0992 /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9383D15D2523A460005C0992 /* CreateView.swift */; };
 		93B84A76251B440E004EB83D /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B84A75251B440E004EB83D /* SignInView.swift */; };
 		93B84A7A251B4C55004EB83D /* SliderSelectedButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B84A79251B4C55004EB83D /* SliderSelectedButtonView.swift */; };
 		93BB709E252340A200AD3522 /* DataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BB709D252340A200AD3522 /* DataViewModel.swift */; };
@@ -48,6 +51,8 @@
 		934E8AF125499D9E00D9E76E /* SliderButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderButtonViewModel.swift; sourceTree = "<group>"; };
 		935880142527900300FDC1B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		935880172527908600FDC1B0 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		9366A208257ED47D00B2AC38 /* addExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addExerciseView.swift; sourceTree = "<group>"; };
+		9366A20B257ED5BB00B2AC38 /* ExerciseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseModel.swift; sourceTree = "<group>"; };
 		937CB6E7251A615B009453C4 /* appTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = appTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		937CB6EA251A615B009453C4 /* appTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appTestApp.swift; sourceTree = "<group>"; };
 		937CB6EC251A615B009453C4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -57,7 +62,7 @@
 		937CB728251A7009009453C4 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		937CB72B251A7061009453C4 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		937D44B82538AACE00FCEE6E /* SingleSlideButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSlideButtonView.swift; sourceTree = "<group>"; };
-		9383D15D2523A460005C0992 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
+		9383D15D2523A460005C0992 /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
 		93B84A75251B440E004EB83D /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		93B84A79251B4C55004EB83D /* SliderSelectedButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderSelectedButtonView.swift; sourceTree = "<group>"; };
 		93BB709D252340A200AD3522 /* DataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewModel.swift; sourceTree = "<group>"; };
@@ -73,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9366A205257EAFD400B2AC38 /* CircularProgress in Frameworks */,
 				D817B26A421392A7A5211D69 /* Pods_appTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				93BB70A02523423C00AD3522 /* DataModel.swift */,
+				9366A20B257ED5BB00B2AC38 /* ExerciseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -170,10 +177,11 @@
 				937CB72B251A7061009453C4 /* SignUpView.swift */,
 				93B84A79251B4C55004EB83D /* SliderSelectedButtonView.swift */,
 				93B84A75251B440E004EB83D /* SignInView.swift */,
-				9383D15D2523A460005C0992 /* DataView.swift */,
+				9383D15D2523A460005C0992 /* CreateView.swift */,
 				93D15B86252749F300DFE38B /* EditView.swift */,
 				934C460625307200006CF643 /* UserSlideMenu.swift */,
 				937D44B82538AACE00FCEE6E /* SingleSlideButtonView.swift */,
+				9366A208257ED47D00B2AC38 /* addExerciseView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -214,6 +222,9 @@
 			dependencies = (
 			);
 			name = appTest;
+			packageProductDependencies = (
+				9366A204257EAFD400B2AC38 /* CircularProgress */,
+			);
 			productName = appTest;
 			productReference = 937CB6E7251A615B009453C4 /* appTest.app */;
 			productType = "com.apple.product-type.application";
@@ -241,6 +252,9 @@
 				Base,
 			);
 			mainGroup = 937CB6DE251A615B009453C4;
+			packageReferences = (
+				9366A203257EAFD400B2AC38 /* XCRemoteSwiftPackageReference "CircularProgressSwiftUI" */,
+			);
 			productRefGroup = 937CB6E8251A615B009453C4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -317,11 +331,13 @@
 				93BB709E252340A200AD3522 /* DataViewModel.swift in Sources */,
 				937CB72C251A7061009453C4 /* SignUpView.swift in Sources */,
 				937CB6ED251A615B009453C4 /* ContentView.swift in Sources */,
+				9366A20C257ED5BC00B2AC38 /* ExerciseModel.swift in Sources */,
 				93BB70A12523423C00AD3522 /* DataModel.swift in Sources */,
 				934E8AE62549937300D9E76E /* HistoryView.swift in Sources */,
-				9383D15E2523A460005C0992 /* DataView.swift in Sources */,
+				9383D15E2523A460005C0992 /* CreateView.swift in Sources */,
 				93D15B87252749F300DFE38B /* EditView.swift in Sources */,
 				934E8AE22549932F00D9E76E /* ProfileView.swift in Sources */,
+				9366A209257ED47D00B2AC38 /* addExerciseView.swift in Sources */,
 				937D44B92538AACE00FCEE6E /* SingleSlideButtonView.swift in Sources */,
 				934E8AEF2549992100D9E76E /* SchedouleView.swift in Sources */,
 				934C460725307200006CF643 /* UserSlideMenu.swift in Sources */,
@@ -520,6 +536,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9366A203257EAFD400B2AC38 /* XCRemoteSwiftPackageReference "CircularProgressSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ArnavMotwani/CircularProgressSwiftUI";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9366A204257EAFD400B2AC38 /* CircularProgress */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9366A203257EAFD400B2AC38 /* XCRemoteSwiftPackageReference "CircularProgressSwiftUI" */;
+			productName = CircularProgress;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 937CB6DF251A615B009453C4 /* Project object */;
 }

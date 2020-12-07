@@ -7,12 +7,11 @@
 
 import Foundation
 
-struct DataModel : Identifiable {
-    
+struct DataModel : Identifiable , Encodable {
+        
     var id : String
     var email : String?
+    var exerciseData : [ExerciseModel]
     var title : String
-    var name : String
     var text : String
-    
 }
