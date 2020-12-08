@@ -19,6 +19,8 @@ struct CreateView: View {
     @State private var show : Bool = false
     @State private var errorAlert : (Bool,String) = (false,"")
     
+    @Binding var showCreate : Bool
+    
     var body: some View {
         NavigationView{
             VStack{
@@ -55,6 +57,7 @@ struct CreateView: View {
                 }
                 Button(action: {
                     self.dataVM.saveData(title: self.tittle, exercise: self.exercise, text: self.text)
+                    self.showCreate.toggle()
                 }) {
                     Text("Save")
                         .frame(width: 250 , height: 55)
@@ -83,6 +86,6 @@ struct CreateView: View {
 
 struct DataView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateView()
+        CreateView(showCreate: .constant(false))
     }
 }

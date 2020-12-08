@@ -6,12 +6,24 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
-struct DataModel : Identifiable , Encodable {
+struct DataModel : Identifiable , Codable {
         
-    var id : String
+    @DocumentID var id: String?
     var email : String?
-    var exerciseData : [ExerciseModel]
-    var title : String
-    var text : String
+    var exerciseData : [ExerciseModel]?
+    var title : String?
+    var text : String?
+    
+//    var dictionary : [String:Any]
+//    {
+//        return [
+//            "id" : id,
+//            "email" : email ?? "",
+//            "exerciseData" : exerciseData ?? [],
+//            "title" : title ?? "",
+//            "text" : text ?? ""
+//        ]
+//    }
 }

@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
-struct ExerciseModel : Identifiable , Hashable{
+struct ExerciseModel : Identifiable , Codable{
     
-    var id = UUID()
+    @DocumentID var id: String?
     var name : String
     var series : String
     var reps : String

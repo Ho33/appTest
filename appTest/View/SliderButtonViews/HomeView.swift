@@ -8,14 +8,15 @@
 import SwiftUI
 import CircularProgress
 
+
 struct HomeView: View {
     @ObservedObject private var registrationVM = RegistrationViewModel()
     @ObservedObject private var dataVM = DataViewModel()
     
     @State private var data = [DataModel]()
     @State private var errorAlert : (Bool,String) = (false,"")
-    @State var show : Bool = false
-    
+    @State var showCreate : Bool = false
+
     var body: some View {
         
 //        TabView{
@@ -24,27 +25,24 @@ struct HomeView: View {
                         ForEach(self.data){ item in
                             NavigationLink(destination: EditView(item: item)){
                                 VStack{
-                                HStack () {
-                                    CircularProgressView(count: 0, total: 10, progress: 0.5, fontOne: Font.system(size: 50), fontTwo: Font.system(size: 25, weight: .bold, design: .rounded), lineWidth: 5).padding(50)
-                                        
-//                                    Text(item.title)
-//                                        .font(.title)
-//                                        .bold()
-//                                    Text(item.name)
-//                                    Text(item.text)
-                                }
+                                    HStack () {
+                                        CircularProgressView(count: 0, total: 10, progress: 0.5, fontOne: Font.system(size: 50), fontTwo: Font.system(size: 25, weight: .bold, design: .rounded), lineWidth: 5).padding(50)
+                                        Text(item.title!)
+                                            .font(.title)
+                                            .bold()
+                                    }
                                 }
                             }
-                        }.onDelete(perform: { index in
+                        }.onDelete(perform: { (index) in
                             self.dataVM.deleteSelected(index : index)
-                        })
+                        }) 
                     }
                     VStack {
                         Spacer()
                         HStack {
                             Spacer()
                             Button(action:{
-                                self.dataVM.saved.toggle()
+                                self.showCreate.toggle()
                             }){
                                 Image(systemName: "plus")
                                     .font(.title)
@@ -57,10 +55,12 @@ struct HomeView: View {
                         }
                     }
                 }
+                
 //            }
-        .sheet(isPresented: self.$dataVM.saved) {
-                CreateView()
+        .sheet(isPresented: self.$showCreate) {
+            CreateView(showCreate: self.$showCreate)
             }
+                
         .onReceive(self.dataVM.$error, perform: { value in
             if let error = value {
                 self.errorAlert.0.toggle()

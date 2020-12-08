@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct HistoryView: View {
+    @ObservedObject private var dataVM = DataViewModel()
+    @State private var data : [DataModel] = []
     var body: some View {
-        Text("history")
+        VStack{
+            List{
+                ForEach(data){value in
+                    Text(value.title!)
+                }
+            }
+        }.onReceive(self.dataVM.$trainingsDone, perform: { value in
+            data = value
+        })
     }
 }
 
