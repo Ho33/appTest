@@ -34,7 +34,6 @@ struct HistoryDestailsView: View {
                 .stroke(Color.black, lineWidth: 0.5))
                 .shadow(color: Color.black.opacity(0.2), radius: 5)
     }
-    
 }
 
 struct SwiftUIView_Previews: PreviewProvider {

@@ -19,6 +19,7 @@ struct SettingsView: View {
         VStack {
             VStack{
                 Text("CHANGUE PASSWORD").font(.headline)
+                Divider()
         SingleFormView(fieldName: "New password", fieldValue: self.$settingsVM.password, isProtected: true)
         SingleFormView(fieldName: "Repeat Password", fieldValue: self.$settingsVM.isPassword, isProtected: true)
             }
@@ -30,9 +31,10 @@ struct SettingsView: View {
             Text("Update password")
         })
             .padding()
-        .border(Color.black)
+        .buttonStyle(Utilities.NeumorphicButtonStyle(bgColor: Color.blue))
             VStack{
             Text("CHANGUE EMAIL").font(.headline)
+                Divider()
         SingleFormView(fieldName: "Update email", fieldValue: self.$settingsVM.email, isProtected: false)
             Text(self.emailChangued)
                 .foregroundColor(.red)
@@ -41,10 +43,18 @@ struct SettingsView: View {
         }, label: {
             Text("Update email")
         }).padding()
-        .border(Color.black)
+        .buttonStyle(Utilities.NeumorphicButtonStyle(bgColor: Color.blue))
             }.padding()
             Spacer()
         }.padding(.top, 100)
+        Button(action: {
+            let url = "http://maps.apple.com/maps?saddr=\(41.00000),\(-3.7)&daddr=\(38.68479),\(-6.4024711)"
+            UIApplication.shared.openURL(URL(string:url)!)
+
+        }, label: {
+            Text("DONDE ESTAMOS")
+        }).padding(.bottom,100)
+        .buttonStyle(Utilities.NeumorphicButtonStyle(bgColor: Color.blue))
         
         .alert(isPresented: self.$errorAlert.0) {
             Alert(title: Text("ERROR") , message: Text(self.errorAlert.1), dismissButton: .default(Text("OK")))
