@@ -17,6 +17,8 @@
 		934E8AF225499D9E00D9E76E /* SliderButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934E8AF125499D9E00D9E76E /* SliderButtonViewModel.swift */; };
 		935880152527900300FDC1B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 935880142527900300FDC1B0 /* GoogleService-Info.plist */; };
 		935880182527908600FDC1B0 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935880172527908600FDC1B0 /* Utilities.swift */; };
+		9361A5C625826C2B00008F71 /* UserDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361A5C525826C2B00008F71 /* UserDataView.swift */; };
+		9361A5CA2582821400008F71 /* HistoryDestailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361A5C92582821400008F71 /* HistoryDestailsView.swift */; };
 		9366A205257EAFD400B2AC38 /* CircularProgress in Frameworks */ = {isa = PBXBuildFile; productRef = 9366A204257EAFD400B2AC38 /* CircularProgress */; };
 		9366A209257ED47D00B2AC38 /* addExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9366A208257ED47D00B2AC38 /* addExerciseView.swift */; };
 		9366A20C257ED5BC00B2AC38 /* ExerciseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9366A20B257ED5BB00B2AC38 /* ExerciseModel.swift */; };
@@ -62,6 +64,8 @@
 		934E8AF125499D9E00D9E76E /* SliderButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderButtonViewModel.swift; sourceTree = "<group>"; };
 		935880142527900300FDC1B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		935880172527908600FDC1B0 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		9361A5C525826C2B00008F71 /* UserDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataView.swift; sourceTree = "<group>"; };
+		9361A5C92582821400008F71 /* HistoryDestailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDestailsView.swift; sourceTree = "<group>"; };
 		9366A208257ED47D00B2AC38 /* addExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addExerciseView.swift; sourceTree = "<group>"; };
 		9366A20B257ED5BB00B2AC38 /* ExerciseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseModel.swift; sourceTree = "<group>"; };
 		936D6B422580E3CC00A2B466 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -128,11 +132,20 @@
 			path = SliderButtonViews;
 			sourceTree = "<group>";
 		};
+		9361A5C8258281F800008F71 /* HistoryViews */ = {
+			isa = PBXGroup;
+			children = (
+				9361A5C92582821400008F71 /* HistoryDestailsView.swift */,
+			);
+			path = HistoryViews;
+			sourceTree = "<group>";
+		};
 		936D6B722581391900A2B466 /* CreateViews */ = {
 			isa = PBXGroup;
 			children = (
 				936D6B732581395100A2B466 /* DropDownView.swift */,
 				936D6B7B25817B7500A2B466 /* DisplayExercisesView.swift */,
+				9361A5C525826C2B00008F71 /* UserDataView.swift */,
 			);
 			path = CreateViews;
 			sourceTree = "<group>";
@@ -214,6 +227,7 @@
 		93B84AAD251B5512004EB83D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9361A5C8258281F800008F71 /* HistoryViews */,
 				936D6B772581525B00A2B466 /* HomeViews */,
 				936D6B722581391900A2B466 /* CreateViews */,
 				934E8AE0254992E700D9E76E /* SliderButtonViews */,
@@ -402,10 +416,12 @@
 				934E8AEC254998F300D9E76E /* HomeView.swift in Sources */,
 				937CB6EB251A615B009453C4 /* appTestApp.swift in Sources */,
 				93B84A7A251B4C55004EB83D /* SliderSelectedButtonView.swift in Sources */,
+				9361A5C625826C2B00008F71 /* UserDataView.swift in Sources */,
 				937CB729251A7009009453C4 /* RegistrationViewModel.swift in Sources */,
 				936D6B5425810EAE00A2B466 /* multilineTextField.swift in Sources */,
 				934D5464253F01300077D13B /* SessionStore.swift in Sources */,
 				93BB70A4252345F700AD3522 /* ErrorViewModel.swift in Sources */,
+				9361A5CA2582821400008F71 /* HistoryDestailsView.swift in Sources */,
 				934E8AE92549939400D9E76E /* SettingsView.swift in Sources */,
 				936D6B492580E91000A2B466 /* SettingsViewModel.swift in Sources */,
 			);

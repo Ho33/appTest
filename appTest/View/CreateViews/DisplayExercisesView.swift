@@ -12,7 +12,7 @@ struct DisplayExercisesView: View {
     var item : DataModel
     
     var body: some View {
-        ScrollView {
+        ScrollView (.vertical, showsIndicators: false) {
             ForEach(self.item.exerciseData!){ exercise in
                 VStack{
                     HStack{
@@ -43,8 +43,8 @@ struct DisplayExercisesView: View {
                         .stroke(Color.black, lineWidth: 0.5))
                 .shadow(radius: 10)
                 .padding()
-                
             }
+            Spacer()
         }
     }
 }

@@ -43,7 +43,8 @@ struct SettingsView: View {
         }).padding()
         .border(Color.black)
             }.padding()
-        }.padding()
+            Spacer()
+        }.padding(.top, 100)
         
         .alert(isPresented: self.$errorAlert.0) {
             Alert(title: Text("ERROR") , message: Text(self.errorAlert.1), dismissButton: .default(Text("OK")))

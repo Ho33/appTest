@@ -22,6 +22,7 @@ struct DropDownView: View {
                 VStack{
                     ForEach(self.groups, id: \.self){ text in
                         Text("\(text)")
+                            .frame(maxWidth: .infinity)
                             .font(.title3)
                             .padding(.all)
                             .onTapGesture {

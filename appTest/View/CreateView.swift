@@ -33,11 +33,11 @@ struct CreateView: View {
                             List{
                                 ForEach(self.exercise){ item in
                                     HStack{
-                                        Text(item.name)
-                                        Text(item.series)
-                                        Text(item.reps)
-                                        Text(item.text)
-                                    }
+                                        Text("Name: " + item.name)
+                                        Spacer()
+                                        Text("Series: " + item.series)
+                                        Text("Reps: " + item.reps)
+                                    }.padding()
                                 }
                             }
                         }
@@ -53,7 +53,11 @@ struct CreateView: View {
                                 .padding()
                         }
                     }
-                    multilineTextField(texto: self.$text)
+                    
+                    multilineTextField(texto: self.$text).padding()
+                }
+                .sheet(isPresented: self.$show) {
+                    addExerciseView(exercise : self.$exercise, show: self.$show)
                 }
                 Button(action: {
                     self.dataVM.saveData(title: self.goupSelected, exercise: self.exercise, text: self.text)
@@ -66,10 +70,9 @@ struct CreateView: View {
                 }.padding(.top,30)
                 Spacer()
             }
-            
-        }.sheet(isPresented: self.$show) {
-            addExerciseView(exercise : self.$exercise, show: self.$show)
+            Spacer()
         }
+        
         .alert(isPresented: self.$errorAlert.0) {
             Alert(title: Text("ERROR") , message: Text(self.errorAlert.1), dismissButton: .default(Text("OK")))
         

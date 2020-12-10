@@ -38,7 +38,7 @@ struct HomeView: View {
                     }
                 }
             }.animation(.spring(response: 0.4, dampingFraction: 0.9))
-        }.padding(EdgeInsets(top: 80, leading: 0, bottom: -400, trailing: 0))
+        }.padding(EdgeInsets(top: 90, leading: 0, bottom: -400, trailing: 0))
                     VStack {
                         Spacer()
                         HStack {
