@@ -11,19 +11,9 @@ import FirebaseFirestoreSwift
 struct DataModel : Identifiable , Codable {
         
     @DocumentID var id: String?
-    var email : String?
     var exerciseData : [ExerciseModel]?
     var title : String?
     var text : String?
+    var date : Date = Date()
     
-//    var dictionary : [String:Any]
-//    {
-//        return [
-//            "id" : id,
-//            "email" : email ?? "",
-//            "exerciseData" : exerciseData ?? [],
-//            "title" : title ?? "",
-//            "text" : text ?? ""
-//        ]
-//    }
 }

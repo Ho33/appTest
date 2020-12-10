@@ -11,19 +11,23 @@ struct addExerciseView: View {
     
     @Binding var exercise : [ExerciseModel]
     @Binding var show : Bool
-    @State private var name : String = ""
-    @State private var series : String = ""
-    @State private var reps : String = ""
-    @State private var text : String = ""
+    @State private var series: [String] = ["1","2","3","4","5","7","8","9","10"]
+    @State private var reps: [String] = ["1","2","3","4","5","7","8","9","10"]
+    @State private var nameSelected : String = ""
+    @State private var seriesSelected : String = "1"
+    @State private var repsSelected : String = "1"
+    @State private var textSelected : String = ""
+    
     
     var body: some View {
         VStack{
-            SingleFormView(fieldName: "name", fieldValue: self.$name, isProtected: false)
-            SingleFormView(fieldName: "series", fieldValue: self.$series, isProtected: false)
-            SingleFormView(fieldName: "reps", fieldValue: self.$reps, isProtected: false)
-            SingleFormView(fieldName: "text", fieldValue: self.$text, isProtected: false)
+            SingleFormView(fieldName: "Name of the Exercise", fieldValue: self.$nameSelected, isProtected: false)
+            DropDownView(groups: self.$series, selectedText: self.$seriesSelected,title : "Number of series")
+            DropDownView(groups: self.$reps, selectedText: self.$repsSelected,title : "Number of reps")
+            multilineTextField(texto: self.$textSelected)
+            
             Button(action:{
-                exercise.append(ExerciseModel.init(name: self.name, series: self.series, reps: self.reps, text: self.text))
+                exercise.append(ExerciseModel.init(name: self.nameSelected, series: self.seriesSelected, reps: self.repsSelected, text: self.textSelected))
                 self.show.toggle()
             }){
                 Image(systemName: "plus")
@@ -34,7 +38,7 @@ struct addExerciseView: View {
                     .clipShape(Circle())
                     .padding()
             }
-        }
+        }.padding()
     }
 }
 struct addExerciseView_Previews: PreviewProvider {

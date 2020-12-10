@@ -11,10 +11,11 @@ struct CreateView: View {
     
     @ObservedObject private var dataVM = DataViewModel()
     
-    @State private var tittle : String = ""
     @State private var name : String = ""
     @State private var text : String = ""
     @State private var userUid : String = ""
+    @State private var groups: [String] = ["Back","Chest","Shoulders","Legs","Arms"]
+    @State private var goupSelected : String = "Back"
     @State private var exercise : [ExerciseModel] = []
     @State private var show : Bool = false
     @State private var errorAlert : (Bool,String) = (false,"")
@@ -26,8 +27,7 @@ struct CreateView: View {
             VStack{
                 VStack{
                     Text("CREATE").font(.system(size: 20)).fontWeight(.ultraLight).padding().frame(width:220 , height:60).foregroundColor(.blue)
-                    SingleFormView(fieldName: "Tittle", fieldValue: self.$tittle, isProtected: false)
-                    
+                    DropDownView(groups: self.$groups, selectedText: self.$goupSelected, title: "Select group of Muscle")
                     Group{
                         VStack{
                             List{
@@ -53,10 +53,10 @@ struct CreateView: View {
                                 .padding()
                         }
                     }
-                    SingleFormView(fieldName: "body", fieldValue: self.$text, isProtected: false)
+                    multilineTextField(texto: self.$text)
                 }
                 Button(action: {
-                    self.dataVM.saveData(title: self.tittle, exercise: self.exercise, text: self.text)
+                    self.dataVM.saveData(title: self.goupSelected, exercise: self.exercise, text: self.text)
                     self.showCreate.toggle()
                 }) {
                     Text("Save")

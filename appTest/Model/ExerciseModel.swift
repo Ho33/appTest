@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-struct ExerciseModel : Identifiable , Codable{
+struct ExerciseModel : Identifiable , Codable {
     
     @DocumentID var id: String?
     var name : String

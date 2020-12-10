@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
-import CircularProgress
 
 
 struct HomeView: View {
     @ObservedObject private var registrationVM = RegistrationViewModel()
     @ObservedObject private var dataVM = DataViewModel()
+    
     
     @State private var data = [DataModel]()
     @State private var errorAlert : (Bool,String) = (false,"")
@@ -19,24 +19,26 @@ struct HomeView: View {
 
     var body: some View {
         
-//        TabView{
-                ZStack () {
-                    List {
-                        ForEach(self.data){ item in
-                            NavigationLink(destination: EditView(item: item)){
-                                VStack{
-                                    HStack () {
-                                        CircularProgressView(count: 0, total: 10, progress: 0.5, fontOne: Font.system(size: 50), fontTwo: Font.system(size: 25, weight: .bold, design: .rounded), lineWidth: 5).padding(50)
-                                        Text(item.title!)
-                                            .font(.title)
-                                            .bold()
-                                    }
-                                }
+        VStack {
+            ScrollView (showsIndicators: false) {
+                VStack () {
+                    ForEach(self.data){ item in
+                        NavigationLink(destination: DetailsView(item: item)){
+                            VStack{
+                                DisplayDataView(item: item)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 15)
+                                            .stroke(Color.black, lineWidth: 0.5))
+                                            .shadow(color: Color.black.opacity(0.2), radius: 5)
+                                    .animation(.spring(response: 0.4, dampingFraction: 0.9))
+                                    .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
                             }
-                        }.onDelete(perform: { (index) in
-                            self.dataVM.deleteSelected(index : index)
-                        }) 
+                        }.buttonStyle(PlainButtonStyle())
+                        .animation(.spring(response: 0.4, dampingFraction: 0.9))
                     }
+                }
+            }.animation(.spring(response: 0.4, dampingFraction: 0.9))
+        }.padding(EdgeInsets(top: 80, leading: 0, bottom: -400, trailing: 0))
                     VStack {
                         Spacer()
                         HStack {
@@ -54,9 +56,7 @@ struct HomeView: View {
                             }
                         }
                     }
-                }
                 
-//            }
         .sheet(isPresented: self.$showCreate) {
             CreateView(showCreate: self.$showCreate)
             }
@@ -67,7 +67,7 @@ struct HomeView: View {
                 self.errorAlert.1 = error.localizedDescription
             }
         })
-        .onReceive(self.dataVM.$data, perform: { value in
+        .onReceive(self.dataVM.$trainings, perform: { value in
             self.data = value
         })
     }

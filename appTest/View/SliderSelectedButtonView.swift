@@ -25,6 +25,7 @@ struct SliderSelectedButtonView: View {
     var body: some View {
         GeometryReader { geometry in
                 NavigationView {
+                    
                     self.getView()
                         .allowsHitTesting(disableView)
                         .navigationBarItems(leading: Button(action: {
@@ -37,7 +38,6 @@ struct SliderSelectedButtonView: View {
                 }.onReceive(self.indexButton.$currentButton){ value in
                     self.currentButton = value
                     setSliderMenuClosed(geometry: geometry)
-                    print(value,"current button")
                 }
                 Spacer()
             

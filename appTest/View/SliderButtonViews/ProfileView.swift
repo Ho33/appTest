@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import FirebaseStorage
+import Firebase
+import UIKit
 
 struct ProfileView: View {
     var body: some View {
-        Text("profile")
+        Text("")
     }
 }
 

@@ -16,7 +16,7 @@ class DataViewModel: ObservableObject {
     @Published var error : Error? = nil
     @Published var saved : Bool = false
     @Published var isEdited : Bool = false
-    @Published var data = [DataModel]()
+    @Published var trainings = [DataModel]()
     @Published var trainingsDone = [DataModel]()
     @State private var user = UserDefaults.standard.string(forKey: "userUid")
     
@@ -45,7 +45,7 @@ class DataViewModel: ObservableObject {
                 return
             }
             if collectionPath == "trainings"{
-                self.data = documents.compactMap { queryDocumentSnapshot -> DataModel? in
+                self.trainings = documents.compactMap { queryDocumentSnapshot -> DataModel? in
                     return try? queryDocumentSnapshot.data(as: DataModel.self)
                 }
             }else{
@@ -55,16 +55,20 @@ class DataViewModel: ObservableObject {
             }
         }}
 
-     func deleteSelected(index: IndexSet) {
-        let id = self.data[index.first!].id
+    func isDone(item: DataModel) {
+        let deleteID = db.collection("users").document(self.user!).collection("trainings").document(item.id!).documentID
+        db.collection("users").document(self.user!).collection("trainings").document(deleteID).delete()
         do {
-            let _ = try db.collection("users").document(self.user!).collection("trainingsDone").addDocument(from: self.data[index.first!])
+            let _ = try db.collection("users").document(self.user!).collection("trainingsDone").addDocument(from: item)
         }
         catch {
             self.error = error
         }
-        db.collection("users").document(self.user!).collection("trainings").document(id!).delete()
-        self.data.remove(atOffsets: index)
+    }
+    
+    func deleteRow(id : String){
+        let deleteID = db.collection("users").document(self.user!).collection("trainings").document(id).documentID
+        db.collection("users").document(self.user!).collection("trainings").document(deleteID).delete()
     }
     
     func editSelected(item:DataModel, title:String, name:String, text:String){
